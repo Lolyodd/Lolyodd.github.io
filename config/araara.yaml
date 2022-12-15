@@ -34,119 +34,65 @@ proxy-groups:
 - name: FINAL
   type: select
   proxies:
-  - All_BestPing
-  - AkunVmess
-  - AkunVless
-  - AkunTrojan
-  - AkunShadowsocks
-  - BestPing_Vless
-  - BestPing_Vmess
-  - BestPing_Trojan
-  - BestPing_Shadowsocks
-  - LoadBalance_Vless
-  - LoadBalance_Vmess
-  - LoadBalance_Trojan
-  - LoadBalance_Shadowsocks
-- name: All_BestPing
+  - BestPing ✨
+  - SG 🇸🇬
+  - ID 🇮🇩
+  - BestPing SG✨
+  - BestPing ID✨
+  - LoadBalance SG 🇸🇬
+  - LoadBalance ID 🇮🇩
+- name: BestPing ✨
   type: url-test
   tolerance: 100
   use:
-  - Vmess
-  - Vless
-  - Trojan
-  - Shadowsocks
-- name: AkunVless
+  - SG 🇸🇬
+  - ID 🇮🇩
+- name: ID 🇮🇩
   type: select
   use:
-  - Vless
-- name: AkunVmess
+  - id
+- name: SG 🇸🇬
   type: select
   use:
-  - Vmess
-- name: AkunTrojan
-  type: select
-  use:
-  - Trojan
-- name: AkunShadowsocks
-  type: select
-  use:
-  - Shadowsocks
-- name: BestPing_Vless
+  - sg
+- name: BestPing SG✨
   type: url-test
   tolerance: 100
   use:
-  - Vless
-- name: BestPing_Trojan
+  - sg
+- name: BestPing ID✨
   type: url-test
   tolerance: 100
   use:
-  - Trojan
-- name: BestPing_Vmess
-  type: url-test
-  tolerance: 100
-  use:
-  - Vmess
-- name: BestPing_Shadowsocks
-  type: url-test
-  tolerance: 100
-  use:
-  - Shadowsocks
-- name: LoadBalance_Vless
+  - id
+- name: LoadBalance SG 🇸🇬
   type: load-balance
   strategy: consistent-hashing
   disable-udp: false
   use:
-  - Vless
-- name: LoadBalance_Vmess
+  - sg
+- name: LoadBalance ID 🇮🇩
   type: load-balance
   strategy: consistent-hashing
   disable-udp: false
   use:
-  - Vmess
-- name: LoadBalance_Trojan
-  type: load-balance
-  strategy: consistent-hashing
-  disable-udp: false
-  use:
-  - Trojan
-- name: LoadBalance_Shadowsocks
-  type: load-balance
-  strategy: consistent-hashing
-  disable-udp: false
-  use:
-  - Shadowsocks
+  - id
 
 proxy-providers:
-  Trojan:
+  sg:
     type: file
-    path: ./Trojan.yaml
+    path: ./sg.yaml
+    url: https://raw.githubusercontent.com/Lolyodd/lolyodd.github.io/master/config/proxy/sg.yaml
     health-check:
       enable: true
       interval: 300
       lazy: true
       url: 'http://www.gstatic.com/generate_204'
       
-  Vmess:
+  id:
     type: file
-    path: ./Vmess.yaml
-    health-check:
-      enable: true
-      interval: 300
-      lazy: true
-      url: 'http://www.gstatic.com/generate_204'
-
-  Shadowsocks:
-    type: file
-    path: ./Shadowsocks.yaml
-    health-check:
-      enable: true
-      interval: 300
-      lazy: true
-      url: 'http://www.gstatic.com/generate_204'
-      
-  Vless:
-    type: file
-    path: ./Vless.yaml
+    path: ./id.yaml
+    url: https://raw.githubusercontent.com/Lolyodd/lolyodd.github.io/master/config/proxy/id.yaml
     health-check:
       enable: true
       interval: 300
@@ -155,9 +101,10 @@ proxy-providers:
 
 rules:
 
-  - PROCESS-NAME,com.opera.browser,AkunVmess
-  - PROCESS-NAME,com.android.chrome,BestPing_Trojan
-  - PROCESS-NAME,com.google.android.youtube,BestPing_Trojan
+  - PROCESS-NAME,com.facebook.lite,SG 🇸🇬
+  - PROCESS-NAME,com.kiwibrowser.browser,SG 🇸🇬
+  - PROCESS-NAME,com.google.android.youtube,LoadBalance SG 🇸🇬
+  - PROCESS-NAME,id.dana,ID 🇮🇩
   - PROCESS-NAME,com.whatsapp,DIRECT
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
