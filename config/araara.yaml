@@ -36,17 +36,8 @@ proxy-groups:
   proxies:
   - AkunSG 
   - ID 
-  - BestPing 
-  - BestPing SG
-  - BestPing ID
   - LoadBalance SG
   - LoadBalance ID
-- name: BestPing 
-  type: url-test
-  tolerance: 100
-  use:
-  - BestPing SG
-  - BestPing ID
 - name: ID
   type: select
   use:
@@ -55,16 +46,6 @@ proxy-groups:
   type: select
   use:
   - sg
-- name: BestPing SG
-  type: url-test
-  tolerance: 100
-  use:
-  - sg
-- name: BestPing ID
-  type: url-test
-  tolerance: 100
-  use:
-  - id
 - name: LoadBalance SG
   type: load-balance
   strategy: consistent-hashing
@@ -103,7 +84,7 @@ rules:
 
   - PROCESS-NAME,com.facebook.lite,AkunSG
   - PROCESS-NAME,com.kiwibrowser.browser,AkunSG
-  - PROCESS-NAME,com.google.android.youtube,LoadBalance SG 🇸🇬
+  - PROCESS-NAME,com.google.android.youtube,LoadBalance SG
   - PROCESS-NAME,id.dana,ID
   - PROCESS-NAME,com.whatsapp,DIRECT
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
