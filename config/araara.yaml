@@ -39,6 +39,8 @@ proxy-groups:
   - BestPing ✨
   - LoadSG 🇸🇬
   - LoadID 🇮🇩
+  - BestPingSG
+  - BestPingID
 - name: ID 🇮🇩
   type: select
   use:
