@@ -34,9 +34,9 @@ proxy-groups:
 - name: FINAL
   type: select
   proxies:
-  - BestPing ✨
   - AkunSG 🇸🇬
   - ID 🇮🇩
+  - BestPing ✨
   - BestPing SG✨
   - BestPing ID✨
   - LoadBalance SG 🇸🇬
@@ -45,13 +45,13 @@ proxy-groups:
   type: url-test
   tolerance: 100
   use:
-  - AkunSG 🇸🇬
-  - ID 🇮🇩
-- name: ID 🇮🇩
+  - BestPing SG✨
+  - BestPing ID✨
+- name: ID
   type: select
   use:
   - id
-- name: AkunSG 🇸🇬
+- name: AkunSG
   type: select
   use:
   - sg
@@ -101,10 +101,10 @@ proxy-providers:
 
 rules:
 
-  - PROCESS-NAME,com.facebook.lite,AkunSG 🇸🇬
-  - PROCESS-NAME,com.kiwibrowser.browser,AkunSG 🇸🇬
+  - PROCESS-NAME,com.facebook.lite,AkunSG
+  - PROCESS-NAME,com.kiwibrowser.browser,AkunSG
   - PROCESS-NAME,com.google.android.youtube,LoadBalance SG 🇸🇬
-  - PROCESS-NAME,id.dana,ID 🇮🇩
+  - PROCESS-NAME,id.dana,ID
   - PROCESS-NAME,com.whatsapp,DIRECT
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
