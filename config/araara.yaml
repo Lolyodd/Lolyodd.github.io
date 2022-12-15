@@ -1,0 +1,179 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+tproxy-port: 7893
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 127.0.0.1:9090
+external-ui: folder
+interface-name: en0
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:7874
+  nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+    - tcp://1.1.1.1
+    - tcp://8.8.8.8
+  fallback:
+    - 1.0.0.1
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+    - 112.215.37.165
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+    - 112.215.37.165
+proxy-groups:
+- name: FINAL
+  type: select
+  proxies:
+  - All_BestPing
+  - AkunVmess
+  - AkunVless
+  - AkunTrojan
+  - AkunShadowsocks
+  - BestPing_Vless
+  - BestPing_Vmess
+  - BestPing_Trojan
+  - BestPing_Shadowsocks
+  - LoadBalance_Vless
+  - LoadBalance_Vmess
+  - LoadBalance_Trojan
+  - LoadBalance_Shadowsocks
+- name: All_BestPing
+  type: url-test
+  tolerance: 100
+  use:
+  - Vmess
+  - Vless
+  - Trojan
+  - Shadowsocks
+- name: AkunVless
+  type: select
+  use:
+  - Vless
+- name: AkunVmess
+  type: select
+  use:
+  - Vmess
+- name: AkunTrojan
+  type: select
+  use:
+  - Trojan
+- name: AkunShadowsocks
+  type: select
+  use:
+  - Shadowsocks
+- name: BestPing_Vless
+  type: url-test
+  tolerance: 100
+  use:
+  - Vless
+- name: BestPing_Trojan
+  type: url-test
+  tolerance: 100
+  use:
+  - Trojan
+- name: BestPing_Vmess
+  type: url-test
+  tolerance: 100
+  use:
+  - Vmess
+- name: BestPing_Shadowsocks
+  type: url-test
+  tolerance: 100
+  use:
+  - Shadowsocks
+- name: LoadBalance_Vless
+  type: load-balance
+  strategy: consistent-hashing
+  disable-udp: false
+  use:
+  - Vless
+- name: LoadBalance_Vmess
+  type: load-balance
+  strategy: consistent-hashing
+  disable-udp: false
+  use:
+  - Vmess
+- name: LoadBalance_Trojan
+  type: load-balance
+  strategy: consistent-hashing
+  disable-udp: false
+  use:
+  - Trojan
+- name: LoadBalance_Shadowsocks
+  type: load-balance
+  strategy: consistent-hashing
+  disable-udp: false
+  use:
+  - Shadowsocks
+
+proxy-providers:
+  Trojan:
+    type: file
+    path: ./Trojan.yaml
+    health-check:
+      enable: true
+      interval: 300
+      lazy: true
+      url: 'http://www.gstatic.com/generate_204'
+      
+  Vmess:
+    type: file
+    path: ./Vmess.yaml
+    health-check:
+      enable: true
+      interval: 300
+      lazy: true
+      url: 'http://www.gstatic.com/generate_204'
+
+  Shadowsocks:
+    type: file
+    path: ./Shadowsocks.yaml
+    health-check:
+      enable: true
+      interval: 300
+      lazy: true
+      url: 'http://www.gstatic.com/generate_204'
+      
+  Vless:
+    type: file
+    path: ./Vless.yaml
+    health-check:
+      enable: true
+      interval: 300
+      lazy: true
+      url: 'http://www.gstatic.com/generate_204'
+
+rules:
+
+  - PROCESS-NAME,com.opera.browser,AkunVmess
+  - PROCESS-NAME,com.android.chrome,BestPing_Trojan
+  - PROCESS-NAME,com.google.android.youtube,BestPing_Trojan
+  - PROCESS-NAME,com.whatsapp,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,::1/128,DIRECT,no-resolve
+  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
+  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - GEOIP,IR,DIRECT
+
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - GEOIP,CN,DIRECT
+  - DST-PORT,80,DIRECT
+  - SRC-PORT,7777,DIRECT
+  - MATCH,FINAL
