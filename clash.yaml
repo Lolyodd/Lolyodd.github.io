@@ -1,0 +1,90 @@
+port: 7891
+socks-port: 7892
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+ipv6: false
+mode: rule
+log-level: info
+unified-delay: true
+geodata-mode: true
+tcp-concurrent: true
+
+sniffer:
+  enable: true
+  sniffing: [ tls, http ]
+  port-whitelist: [ 80, 443 ]
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  default-nameserver: [ 8.8.8.8, 8.8.4.4 ]
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver: [ 8.8.8.8, 8.8.4.4, https://dns.gooogle/dns-query, tls://dns.google:853 ]
+  fallback: [ 76.76.2.2, 76.76.10.2, https://freedns.controld.com/p2, tls://p2.freedns.controld.com:853 ]
+  fallback-filter:
+    geoip: true
+    geoip-code: ID
+    geosite: [ gfw ]
+
+Bug:  # Khusus Path wss://
+  - &domain 104.22.64.181
+  - &domain1 api.midtrans.com
+
+connectivity-check: &check
+  interval: 300
+  url: 'http://cp.cloudflare.com/generate_204'
+
+Group: &group
+  type: select
+  proxies: [ Select📌, ♨️Auto, 🎯Load Balance ]
+
+all: &all
+  proxies: [ FREE01 ]
+
+Select: &select
+  type: select
+  <<: *all
+URL-Test: &url-test 
+  type: url-test
+  <<: [ *check, *all ]
+Load-Balance: &lb
+  type: load-balance
+  strategy: consistent-hashing
+  <<: [ *check, *all ]
+
+proxies:
+  - name: FREE01
+    server: 104.22.64.181
+    port: 80
+    type: vmess
+    uuid: 47517491-8be8-413c-bda8-68651fea0199
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: sgl-1.herbalv2ray.me
+    network: ws
+    ws-opts:
+      path: /vmess
+      headers:
+        Host: sgl-1.herbalv2ray.me
+    udp: true
+
+proxy-groups:
+  - name: 🔥FINAL
+    <<: *group
+  - name: Select📌
+    <<: *select
+  - name: ♨️Auto
+    <<: *url-test
+  - name: 🎯Load Balance
+    <<: *lb
+
+rules:
+  - GEOSITE,YouTube,🎯Load Balance
+  - GEOSITE,Whatsapp,Select📌
+  - GEOSITE,Spotify,♨️Auto
+  - GEOIP,ID,🔥FINAL
+  - MATCH,🔥FINAL
