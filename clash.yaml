@@ -41,7 +41,7 @@ Group: &group
   proxies: [ Select📌, ♨️Auto, 🎯Load Balance ]
 
 all: &all
-  proxies: [ FREE01 ]
+  proxies: [ FREE01, SGOVH, SGCTB, IDAMP, VIP01 ]
 
 Select: &select
   type: select
@@ -71,7 +71,70 @@ proxies:
       headers:
         Host: sgl-1.herbalv2ray.me
     udp: true
-
+  - name: SGCTB
+    server: 104.22.64.181
+    port: 443
+    type: vmess
+    uuid: 92f859a2-f8ac-4b3a-a291-7a0b30435b17
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-ctb-sg01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/pedidu-globalssh
+      headers:
+        Host: vmess-ctb-sg01.globalssh.xyz
+    udp: true
+  - name: SGOVH
+    server: 104.22.64.181
+    port: 443
+    type: vmess
+    uuid: 5ecb740b-f004-4c6f-90fd-30cbe6596f04
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-ovh-sg01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/ovhpedo-globalssh
+      headers:
+        Host: vmess-ovh-sg01.globalssh.xyz
+    udp: true
+  - name: IDAMP
+    server: 104.22.64.181
+    port: 443
+    type: vmess
+    uuid: 49acef15-2452-4736-a17d-78bdd3a996ee
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-amp-id01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/messpedo-globalssh
+      headers:
+        Host: vmess-amp-id01.globalssh.xyz
+    udp: true
+  - name: VIP01
+    server: 104.22.64.181
+    port: 443
+    type: vmess
+    uuid: 20eed4b4-428c-4efe-8a11-525751ca5461
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vip13.globalssh.com
+    network: ws
+    ws-opts:
+      path: /vmess-ws
+      headers:
+        Host: vip13.globalssh.com
+    udp: true
 proxy-groups:
   - name: 🔥FINAL
     <<: *group
