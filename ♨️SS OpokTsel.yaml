@@ -1,0 +1,134 @@
+port: 7891
+socks-port: 7892
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+ipv6: false
+mode: rule
+log-level: info
+unified-delay: true
+geodata-mode: true
+tcp-concurrent: true
+
+sniffer:
+  enable: true
+  sniffing: [ tls, http ]
+  port-whitelist: [ 80, 443 ]
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  default-nameserver: [ 8.8.8.8, 8.8.4.4 ]
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver: [ 8.8.8.8, 8.8.4.4, https://dns.gooogle/dns-query, tls://dns.google:853 ]
+  fallback: [ 76.76.2.2, 76.76.10.2, https://freedns.controld.com/p2, tls://p2.freedns.controld.com:853 ]
+  fallback-filter:
+    geoip: true
+    geoip-code: ID
+    geosite: [ gfw ]
+
+Bug:  # Khusus Path wss://
+  - &domain 104.17.2.81
+  - &domain1 api.midtrans.com
+
+connectivity-check: &check
+  interval: 300
+  url: 'http://cp.cloudflare.com/generate_204'
+
+Group: &group
+  type: select
+  proxies: [ Select📌, ♨️Auto, 🎯Load Balance ]
+
+all: &all
+  proxies: [ 💎SS20221️⃣, 💎SS20222️⃣, 💎SS20223️⃣, 💎SS20224️⃣ ]
+
+Select: &select
+  type: select
+  <<: *all
+URL-Test: &url-test 
+  type: url-test
+  <<: [ *check, *all ]
+Load-Balance: &lb
+  type: load-balance
+  strategy: consistent-hashing
+  <<: [ *check, *all ]
+
+proxies:
+  - name: 💎SS20221️⃣
+    type: ss
+    server: *domain
+    port: 443
+    cipher: 2022-blake3-aes-256-gcm
+    password: "30I9mzE5WanpZFREm2VqIO74ovg3TcI6fIvp468LwVxQ"
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: ss2022-01.xtls.my.id
+      path: wss://api.midtrans.com/xray-ws
+      sni: *domain
+      tls: true
+      skip-cert-verify: true
+      mux: false
+  - name: 💎SS20222️⃣
+    type: ss
+    server: *domain
+    port: 443
+    cipher: 2022-blake3-chacha20-poly1305
+    password: "yMeGjhNN4nrIaoZ4yTJB5mw5yZYmBM2h3ZQ9yrpDwvMq"
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: ss2022-02.xtls.my.id
+      path: wss://api.midtrans.com/xray-ws
+      sni: *domain
+      tls: true
+      skip-cert-verify: true
+      mux: false
+  - name: 💎SS20223️⃣
+    type: ss
+    server: *domain
+    port: 443
+    cipher: 2022-blake3-aes-128-gcm
+    password: "YIyiZlEvzarhE3qvUm2tC0Fna6UwRmGplSwdikgLHDVD"
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: ss2022-03.xtls.my.id
+      path: wss://api.midtrans.com/xray-ws
+      sni: *domain
+      tls: true
+      skip-cert-verify: true
+      mux: false
+  - name: 💎SS20224️⃣
+    type: ss
+    server: *domain
+    port: 443
+    cipher: 2022-blake3-chacha20-poly1305
+    password: "vE8L7ObsBlp80fbIzKP11Jo4JIZ9sWDDBVOGmMgkJi6A"
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: ss2022-04.xtls.my.id
+      path: wss://api.midtrans.com/xray-ws
+      sni: *domain
+      tls: true
+      skip-cert-verify: true
+      mux: false
+
+proxy-groups:
+  - name: 🔥FINAL
+    <<: *group
+  - name: Select📌
+    <<: *select
+  - name: ♨️Auto
+    <<: *url-test
+  - name: 🎯Load Balance
+    <<: *lb
+
+rules:
+  - GEOSITE,YouTube,🎯Load Balance
+  - GEOSITE,Whatsapp,Select📌
+  - GEOSITE,Spotify,♨️Auto
+  - GEOIP,ID,🔥FINAL
+  - MATCH,🔥FINAL
