@@ -35,7 +35,7 @@ proxy-groups:
   type: select
   proxies:
   - BestPing ✨
-  - SG 🇸🇬
+  - AkunSG 🇸🇬
   - ID 🇮🇩
   - BestPing SG✨
   - BestPing ID✨
