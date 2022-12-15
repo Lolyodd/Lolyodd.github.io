@@ -45,13 +45,13 @@ proxy-groups:
   type: url-test
   tolerance: 100
   use:
-  - SG 🇸🇬
+  - AkunSG 🇸🇬
   - ID 🇮🇩
 - name: ID 🇮🇩
   type: select
   use:
   - id
-- name: SG 🇸🇬
+- name: AkunSG 🇸🇬
   type: select
   use:
   - sg
@@ -101,8 +101,8 @@ proxy-providers:
 
 rules:
 
-  - PROCESS-NAME,com.facebook.lite,SG 🇸🇬
-  - PROCESS-NAME,com.kiwibrowser.browser,SG 🇸🇬
+  - PROCESS-NAME,com.facebook.lite,AkunSG 🇸🇬
+  - PROCESS-NAME,com.kiwibrowser.browser,AkunSG 🇸🇬
   - PROCESS-NAME,com.google.android.youtube,LoadBalance SG 🇸🇬
   - PROCESS-NAME,id.dana,ID 🇮🇩
   - PROCESS-NAME,com.whatsapp,DIRECT
