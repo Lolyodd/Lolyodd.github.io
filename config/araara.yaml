@@ -36,7 +36,6 @@ proxy-groups:
   proxies:
   - SG 🇸🇬
   - ID 🇮🇩
-  - BestPing ✨
   - LoadSG 🇸🇬
   - LoadID 🇮🇩
   - BestPingSG
@@ -49,12 +48,6 @@ proxy-groups:
   type: select
   use:
   - sg
-- name: BestPing ✨
-  type: url-test
-  tolerance: 100
-  use:
-  - BestPingSG
-  - BestPingID
 - name: BestPingSG 
   type: url-test
   tolerance: 100
