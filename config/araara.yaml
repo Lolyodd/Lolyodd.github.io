@@ -34,25 +34,42 @@ proxy-groups:
 - name: FINAL
   type: select
   proxies:
-  - AkunSG 
-  - ID 
-  - LoadBalance SG
-  - LoadBalance ID
-- name: ID
+  - SG 🇸🇬
+  - ID 🇮🇩
+  - BestPing ✨
+  - LoadSG 🇸🇬
+  - LoadID 🇮🇩
+- name: ID 🇮🇩
   type: select
   use:
   - id
-- name: AkunSG
+- name: SG 🇸🇬
   type: select
   use:
   - sg
-- name: LoadBalance SG
+- name: BestPing ✨
+  type: url-test
+  tolerance: 100
+  use:
+  - BestPingSG
+  - BestPingID
+- name: BestPingSG 
+  type: url-test
+  tolerance: 100
+  use:
+  - sg
+- name: BestPingID
+  type: url-test
+  tolerance: 100
+  use:
+  - id
+- name: LoadSG 🇸🇬
   type: load-balance
   strategy: consistent-hashing
   disable-udp: false
   use:
   - sg
-- name: LoadBalance ID
+- name: LoadID 🇮🇩
   type: load-balance
   strategy: consistent-hashing
   disable-udp: false
@@ -82,10 +99,10 @@ proxy-providers:
 
 rules:
 
-  - PROCESS-NAME,com.facebook.lite,AkunSG
-  - PROCESS-NAME,com.kiwibrowser.browser,AkunSG
-  - PROCESS-NAME,com.google.android.youtube,LoadBalance SG
-  - PROCESS-NAME,id.dana,ID
+  - PROCESS-NAME,com.facebook.lite,SG 🇸🇬
+  - PROCESS-NAME,com.kiwibrowser.browser,SG 🇸🇬
+  - PROCESS-NAME,com.google.android.youtube,LoadSG 🇸🇬
+  - PROCESS-NAME,id.dana,ID 🇮🇩
   - PROCESS-NAME,com.whatsapp,DIRECT
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
