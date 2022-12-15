@@ -34,19 +34,19 @@ proxy-groups:
 - name: FINAL
   type: select
   proxies:
-  - AkunSG 🇸🇬
-  - ID 🇮🇩
-  - BestPing ✨
-  - BestPing SG✨
-  - BestPing ID✨
-  - LoadBalance SG 🇸🇬
-  - LoadBalance ID 🇮🇩
-- name: BestPing ✨
+  - AkunSG 
+  - ID 
+  - BestPing 
+  - BestPing SG
+  - BestPing ID
+  - LoadBalance SG
+  - LoadBalance ID
+- name: BestPing 
   type: url-test
   tolerance: 100
   use:
-  - BestPing SG✨
-  - BestPing ID✨
+  - BestPing SG
+  - BestPing ID
 - name: ID
   type: select
   use:
@@ -55,23 +55,23 @@ proxy-groups:
   type: select
   use:
   - sg
-- name: BestPing SG✨
+- name: BestPing SG
   type: url-test
   tolerance: 100
   use:
   - sg
-- name: BestPing ID✨
+- name: BestPing ID
   type: url-test
   tolerance: 100
   use:
   - id
-- name: LoadBalance SG 🇸🇬
+- name: LoadBalance SG
   type: load-balance
   strategy: consistent-hashing
   disable-udp: false
   use:
   - sg
-- name: LoadBalance ID 🇮🇩
+- name: LoadBalance ID
   type: load-balance
   strategy: consistent-hashing
   disable-udp: false
