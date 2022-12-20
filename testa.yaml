@@ -39,28 +39,44 @@ connectivity-check: &check
 
 Group: &group
   type: select
-  proxies: [ Select📌, 🎯Load Balance, 🌐Sosmed ]
+  proxies: [ Select📌, 🎬Streaming, 🌐Sosmed ]
 
 all: &all
   proxies: [ VM•VIP, VL•VIP, TR•VIP, VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
 vip: &vip
-  proxies: [ VM•VIP, VL•VIP, TR•VIP ]
+  proxies: [ VM•VIP, VL•VIP, TR•VIP, TR•VIP•TLS1, TR•VIP•TLS2 ]
 free: &free
   proxies: [ VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
 
 Select: &select
   type: select
   <<: *all
-URL-Test: &url-test 
+Sosmed: &url-test 
   type: url-test
   <<: [ *check, *vip ]
-Load-Balance: &lb
+Streaming: &lb
   type: load-balance
   strategy: consistent-hashing
   <<: [ *check, *free ]
 
 proxies:
 #==============VIP=============#
+  - name: TR•VIP•TLS1
+    server: vip13.globalssh.com
+    port: 443
+    type: trojan
+    password: pedoluh
+    skip-cert-verify: true
+    sni: *ssl1
+    udp: true
+  - name: TR•VIP•TLS2
+    server: vip13.globalssh.com
+    port: 443
+    type: trojan
+    password: pedoluh
+    skip-cert-verify: true
+    sni: *ssl2
+    udp: true
   - name: VM•VIP
     server: *domain
     port: 443
@@ -179,7 +195,7 @@ proxy-groups:
     <<: *select
   - name: 🌐Sosmed
     <<: *url-test
-  - name: 🎯Load Balance
+  - name: 🎬Streaming
     <<: *lb
 
 rule-providers:
@@ -206,7 +222,7 @@ rule-providers:
 
 rules:
   - RULE-SET,clash,REJECT
-  - RULE-SET,rule_Streaming,🎯Load Balance
+  - RULE-SET,rule_Streaming,🎬Streaming
   - RULE-SET,rule_Sosmed,🌐Sosmed
   - GEOIP,ID,🔥FINAL
   - MATCH,🔥FINAL
