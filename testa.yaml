@@ -265,6 +265,7 @@ rules:
   - RULE-SET,rule_Sosmed,🌐Sosmed
   - RULE-SET,rule_metaverse,🌐Sosmed
   - RULE-SET,rule_Mega,💾Mega
+  - PROCESS-NAME,mega.privacy.android.app,💾Mega
   - RULE-SET,rule_playstore,Select📌
   - GEOIP,ID,🔥FINAL
   - MATCH,🔥FINAL
