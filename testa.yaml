@@ -29,7 +29,9 @@ dns:
     geosite: [ gfw ]
 
 Bug:  # Khusus Path wss://
-  - &domain 172.67.199.34
+  - &domain 172.67.199.34  #AkrabNoMalak
+  - &ssl1 media.fcgk35-1.fna.whatsapp.net #AkrabSSL
+  - &ssl2 layanan.ruangguru.com #AkrabSSL
 
 connectivity-check: &check
   interval: 300
@@ -37,7 +39,7 @@ connectivity-check: &check
 
 Group: &group
   type: select
-  proxies: [ Select📌, ♨️Auto, 🎯Load Balance, Sosmed, Streaming ]
+  proxies: [ Select📌, 🎯Load Balance, 🌐Sosmed ]
 
 all: &all
   proxies: [ VM•VIP, VL•VIP, TR•VIP, VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
@@ -51,7 +53,7 @@ Select: &select
   <<: *all
 URL-Test: &url-test 
   type: url-test
-  <<: [ *check, *vip, *free ]
+  <<: [ *check, *vip ]
 Load-Balance: &lb
   type: load-balance
   strategy: consistent-hashing
@@ -175,11 +177,7 @@ proxy-groups:
     <<: *group
   - name: Select📌
     <<: *select
-  - name: Sosmed
-    <<: *url-test
-  - name: Streaming
-    <<: *url-test
-  - name: ♨️Auto
+  - name: 🌐Sosmed
     <<: *url-test
   - name: 🎯Load Balance
     <<: *lb
@@ -208,7 +206,7 @@ rule-providers:
 
 rules:
   - RULE-SET,clash,REJECT
-  - RULE-SET,rule_Streaming,Streaming
-  - RULE-SET,rule_Sosmed,Sosmed
+  - RULE-SET,rule_Streaming,🎯Load Balance
+  - RULE-SET,rule_Sosmed,🌐Sosmed
   - GEOIP,ID,🔥FINAL
   - MATCH,🔥FINAL
