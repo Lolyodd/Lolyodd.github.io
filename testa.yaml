@@ -55,21 +55,23 @@ Load-Balance: &lb
   <<: [ *check, *all ]
 
 proxies:
-  - name: 💎SS20221️⃣
+  - name: Azure
     type: ss
-    server: engage.zoominfo.com
-    port: 443
-    cipher: 2022-blake3-aes-256-gcm
-    password: "GlobalSSHPremiumShadow==:6xs58gD6BzKNSX/v+jbZkg=="
+    server: 172.67.199.34
+    port: 80
+    cipher: 2022-blake3-aes-128-gcm
+    password: GlobalSSHPremiumShadow==:6xs58gD6BzKNSX/v+jbZkg==
+    udp: true
     plugin: v2ray-plugin
     plugin-opts:
       mode: websocket
       host: ss-ctb-sg01.globalssh.xyz
-      path: /shadow-ws/tespedo-globalssh
-      sni: engage.zoominfo.com
-      tls: true
+      tls: false
       skip-cert-verify: true
+      path: "/shadow-ws/tespedo-globalssh"
       mux: false
+      headers:
+        custom: ss-ctb-sg01.globalssh.xyz
 
 proxy-groups:
   - name: 🔥FINAL
