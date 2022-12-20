@@ -41,21 +41,71 @@ Group: &group
   proxies: [ Select📌, ♨️Auto, 🎯Load Balance ]
 
 all: &all
-  proxies: [ Azure ]
+  proxies: [ VM•VIP, VL•VIP, TR•VIP, VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
+vip: &vip
+  proxies: [ VM•VIP, VL•VIP, TR•VIP ]
+free: &free
+  proxies: [ VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
 
 Select: &select
   type: select
   <<: *all
 URL-Test: &url-test 
   type: url-test
-  <<: [ *check, *all ]
+  <<: [ *check, *vip ]
 Load-Balance: &lb
   type: load-balance
   strategy: consistent-hashing
-  <<: [ *check, *all ]
+  <<: [ *check, *free ]
 
 proxies:
-  - name: Azure
+#==============VIP=============#
+  - name: VM•VIP
+    server: vip13.globalssh.com
+    port: 443
+    type: vmess
+    uuid: c7ab1706-50b2-48c0-9ff7-2414eefcef7b
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vip13.globalssh.com
+    network: ws
+    ws-opts:
+      path: /vmess-ws
+      headers:
+        Host: vip13.globalssh.com
+    udp: true
+  - name: VL•VIP
+    server: vip13.globalssh.com
+    port: 443
+    type: vless
+    uuid: c7ab1706-50b2-48c0-9ff7-2414eefcef7b
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vip13.globalssh.com
+    network: ws
+    ws-opts:
+      path: /vless-ws
+      headers:
+        Host: vip13.globalssh.com
+    udp: true
+  - name: TR•VIP
+    server: vip13.globalssh.com
+    port: 443
+    type: trojan
+    password: pedoluh
+    skip-cert-verify: true
+    sni: trojan-ws
+    network: ws
+    ws-opts:
+      path: ?sni=trojan-ws
+      headers:
+        Host: vip13.globalssh.com
+    udp: true
+#==============FREE=============#
+  - name: SS•CH•FREE
     type: ss
     server: 172.67.199.34
     port: 80
@@ -72,12 +122,64 @@ proxies:
       mux: false
       headers:
         custom: ss-ch-sg01.globalssh.xyz
+  - name: VM•CTB•FREE
+    server: vmess-ctb-sg01.globalssh.xyz
+    port: 443
+    type: vmess
+    uuid: 92f859a2-f8ac-4b3a-a291-7a0b30435b17
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-ctb-sg01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/pedidu-globalssh
+      headers:
+        Host: vmess-ctb-sg01.globalssh.xyz
+    udp: true
+  - name: VM•OVH•FREE
+    server: vmess-ovh-sg01.globalssh.xyz
+    port: 443
+    type: vmess
+    uuid: 5ecb740b-f004-4c6f-90fd-30cbe6596f04
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-ovh-sg01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/ovhpedo-globalssh
+      headers:
+        Host: vmess-ovh-sg01.globalssh.xyz
+    udp: true
+  - name: VM•IKD•FREE
+    server: vmess-ikd-id01.globalssh.xyz
+    port: 443
+    type: vmess
+    uuid: 49acef15-2452-4736-a17d-78bdd3a996ee
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-ikd-id01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/messpedo-globalssh
+      headers:
+        Host: vmess-ikd-id01.globalssh.xyz
+    udp: true
 
 proxy-groups:
   - name: 🔥FINAL
     <<: *group
   - name: Select📌
     <<: *select
+  - name: Sosmed
+    <<: *select
+  - name: Streaming
+    <<: *url-test
   - name: ♨️Auto
     <<: *url-test
   - name: 🎯Load Balance
@@ -91,10 +193,23 @@ rule-providers:
     path: ./providers/rule-provider_clash.yaml
     interval: 86400
 
+  rule_Sosmed:
+    type: http
+    behavior: classical
+    path: "./rule_sosmed.yaml"
+    url: https://raw.githubusercontent.com/malikshi/clash_for_android/main/rule_provider/rule_sosmed.yaml
+    interval: 86400
+
+  rule_Streaming:
+    type: http
+    behavior: classical
+    path: "./rule_streaming.yaml"
+    url: https://raw.githubusercontent.com/malikshi/clash_for_android/main/rule_provider/rule_streaming.yaml
+    interval: 86400
+
 rules:
   - RULE-SET,clash,REJECT
-  - GEOSITE,YouTube,🎯Load Balance
-  - GEOSITE,Whatsapp,Select📌
-  - GEOSITE,Spotify,♨️Auto
+  - RULE-SET,rule_Streaming,Streaming
+  - RULE-SET,rule_Sosmed,Sosmed
   - GEOIP,ID,🔥FINAL
   - MATCH,🔥FINAL
