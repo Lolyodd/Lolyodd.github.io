@@ -29,8 +29,7 @@ dns:
     geosite: [ gfw ]
 
 Bug:  # Khusus Path wss://
-  - &domain 104.17.2.81
-  - &domain1 api.midtrans.com
+  - &domain 172.67.199.34
 
 connectivity-check: &check
   interval: 300
@@ -61,7 +60,7 @@ Load-Balance: &lb
 proxies:
 #==============VIP=============#
   - name: VM•VIP
-    server: vip13.globalssh.com
+    server: *domain
     port: 443
     type: vmess
     uuid: c7ab1706-50b2-48c0-9ff7-2414eefcef7b
@@ -77,7 +76,7 @@ proxies:
         Host: vip13.globalssh.com
     udp: true
   - name: VL•VIP
-    server: vip13.globalssh.com
+    server: *domain
     port: 443
     type: vless
     uuid: c7ab1706-50b2-48c0-9ff7-2414eefcef7b
@@ -92,7 +91,7 @@ proxies:
         Host: vip13.globalssh.com
     udp: true
   - name: TR•VIP
-    server: vip13.globalssh.com
+    server: *domain
     port: 443
     type: trojan
     password: pedoluh
@@ -123,7 +122,7 @@ proxies:
       headers:
         custom: ss-ch-sg01.globalssh.xyz
   - name: VM•CTB•FREE
-    server: vmess-ctb-sg01.globalssh.xyz
+    server: *domain
     port: 443
     type: vmess
     uuid: 92f859a2-f8ac-4b3a-a291-7a0b30435b17
@@ -139,7 +138,7 @@ proxies:
         Host: vmess-ctb-sg01.globalssh.xyz
     udp: true
   - name: VM•OVH•FREE
-    server: vmess-ovh-sg01.globalssh.xyz
+    server: *domain
     port: 443
     type: vmess
     uuid: 5ecb740b-f004-4c6f-90fd-30cbe6596f04
@@ -155,7 +154,7 @@ proxies:
         Host: vmess-ovh-sg01.globalssh.xyz
     udp: true
   - name: VM•IKD•FREE
-    server: vmess-ikd-id01.globalssh.xyz
+    server: *domain
     port: 443
     type: vmess
     uuid: 49acef15-2452-4736-a17d-78bdd3a996ee
