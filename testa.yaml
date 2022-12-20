@@ -65,21 +65,27 @@ Mega: &mega
 proxies:
 #==============VIP=============#
   - name: TR•VIP•TLS1
+    type: trojan
     server: vip13.globalssh.com
     port: 443
-    type: trojan
     password: pedoluh
-    skip-cert-verify: true
-    sni: layanan.ruangguru.com
     udp: true
+    sni: layanan.ruangguru.com
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
   - name: TR•VIP•TLS2
+    type: trojan
     server: vip13.globalssh.com
     port: 443
-    type: trojan
     password: pedoluh
-    skip-cert-verify: true
-    sni: layanan.ruangguru.com
     udp: true
+    sni: layanan.ruangguru.com
+    alpn:
+      - h2
+      - http/1.1
+    skip-cert-verify: true
   - name: VM•VIP
     server: *domain
     port: 443
