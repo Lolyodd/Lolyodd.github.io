@@ -41,7 +41,7 @@ Group: &group
   proxies: [ Select📌, ♨️Auto, 🎯Load Balance ]
 
 all: &all
-  proxies: [ 💎SS20221️⃣ ]
+  proxies: [ Azure ]
 
 Select: &select
   type: select
