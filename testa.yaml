@@ -96,10 +96,10 @@ proxies:
     type: trojan
     password: pedoluh
     skip-cert-verify: true
-    sni: trojan-ws
+    sni: vip13.globalssh.com
     network: ws
     ws-opts:
-      path: ?sni=trojan-ws
+      path: /trojan-ws
       headers:
         Host: vip13.globalssh.com
     udp: true
