@@ -37,7 +37,7 @@ connectivity-check: &check
 
 Group: &group
   type: select
-  proxies: [ Select📌, ♨️Auto, 🎯Load Balance ]
+  proxies: [ Select📌, ♨️Auto, 🎯Load Balance, Sosmed, Streaming ]
 
 all: &all
   proxies: [ VM•VIP, VL•VIP, TR•VIP, VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
@@ -51,7 +51,7 @@ Select: &select
   <<: *all
 URL-Test: &url-test 
   type: url-test
-  <<: [ *check, *vip ]
+  <<: [ *check, *vip, *free ]
 Load-Balance: &lb
   type: load-balance
   strategy: consistent-hashing
@@ -176,7 +176,7 @@ proxy-groups:
   - name: Select📌
     <<: *select
   - name: Sosmed
-    <<: *select
+    <<: *url-test
   - name: Streaming
     <<: *url-test
   - name: ♨️Auto
