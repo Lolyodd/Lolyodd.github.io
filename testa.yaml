@@ -39,7 +39,7 @@ connectivity-check: &check
 
 Group: &group
   type: select
-  proxies: [ Select📌, 🎬Streaming, 🌐Sosmed ]
+  proxies: [ Select📌, 🎬Streaming, 🌐Sosmed, 💾Mega ]
 
 all: &all
   proxies: [ VM•VIP, VL•VIP, TR•VIP, VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
@@ -52,12 +52,15 @@ Select: &select
   type: select
   <<: *all
 Sosmed: &url-test 
-  type: url-test
+  type: select
   <<: [ *check, *vip ]
 Streaming: &lb
-  type: load-balance
+  type: url-test
   strategy: consistent-hashing
   <<: [ *check, *free ]
+Mega: &mega
+  type: select
+  <<: *all
 
 proxies:
 #==============VIP=============#
@@ -67,7 +70,7 @@ proxies:
     type: trojan
     password: pedoluh
     skip-cert-verify: true
-    sni: *ssl1
+    sni: layanan.ruangguru.com
     udp: true
   - name: TR•VIP•TLS2
     server: vip13.globalssh.com
@@ -75,7 +78,7 @@ proxies:
     type: trojan
     password: pedoluh
     skip-cert-verify: true
-    sni: *ssl2
+    sni: layanan.ruangguru.com
     udp: true
   - name: VM•VIP
     server: *domain
@@ -194,9 +197,11 @@ proxy-groups:
   - name: Select📌
     <<: *select
   - name: 🌐Sosmed
-    <<: *url-test
+    <<: *select
   - name: 🎬Streaming
-    <<: *lb
+    <<: *url-test
+  - name: 💾Mega
+    <<: *mega
 
 rule-providers:
   clash:
@@ -220,9 +225,17 @@ rule-providers:
     url: https://raw.githubusercontent.com/malikshi/clash_for_android/main/rule_provider/rule_streaming.yaml
     interval: 86400
 
+  rule_Mega:
+    type: http
+    behavior: classical
+    path: "./rule_sosmed.yaml"
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/MEGA/MEGA.yaml
+    interval: 86400
+
 rules:
   - RULE-SET,clash,REJECT
   - RULE-SET,rule_Streaming,🎬Streaming
   - RULE-SET,rule_Sosmed,🌐Sosmed
+  - RULE-SET,rule_Mega,💾Mega
   - GEOIP,ID,🔥FINAL
   - MATCH,🔥FINAL
