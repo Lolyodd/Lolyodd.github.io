@@ -57,7 +57,7 @@ Load-Balance: &lb
 proxies:
   - name: 💎SS20221️⃣
     type: ss
-    server: 172.67.199.34
+    server: engage.zoominfo.com
     port: 443
     cipher: 2022-blake3-aes-256-gcm
     password: "GlobalSSHPremiumShadow==:6xs58gD6BzKNSX/v+jbZkg=="
@@ -66,7 +66,7 @@ proxies:
       mode: websocket
       host: ss-ctb-sg01.globalssh.xyz
       path: /shadow-ws/tespedo-globalssh
-      sni: ss-ctb-sg01.globalssh.xyz
+      sni: engage.zoominfo.com
       tls: true
       skip-cert-verify: true
       mux: false
