@@ -84,7 +84,7 @@ proxy-providers:
   vip:
     type: file
     path: ./vip.yaml
-    url: http://lolinetz.my.id/vip.yaml
+    url: https://raw.githubusercontent.com/Lolyodd/lolyodd.github.io/master/vip.yaml
     health-check:
       enable: true
       interval: 300
@@ -94,7 +94,7 @@ proxy-providers:
   free:
     type: file
     path: ./free.yaml
-    url: http://lolinetz.my.id/free.yaml
+    url: https://raw.githubusercontent.com/Lolyodd/lolyodd.github.io/master/free.yaml
     health-check:
       enable: true
       interval: 300
