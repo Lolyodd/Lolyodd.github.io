@@ -44,7 +44,7 @@ Group: &group
 all: &all
   proxies: [ VM•VIP, VL•VIP, TR•VIP, VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
 vip: &vip
-  proxies: [ VM•VIP, VL•VIP, TR•VIP, TR•VIP•TLS1, TR•VIP•TLS2 ]
+  proxies: [ VM•VIP, VL•VIP, TR•VIP, TR•VIP•TLS ]
 free: &free
   proxies: [ VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
 
@@ -64,28 +64,14 @@ Mega: &mega
 
 proxies:
 #==============VIP=============#
-  - name: TR•VIP•TLS1
-    type: trojan
-    server: vip13.globalssh.com
+  - name: TR•VIP•TLS
+    server: 38.54.16.204
     port: 443
-    password: pedoluh
-    udp: true
-    sni: layanan.ruangguru.com
-    alpn:
-      - h2
-      - http/1.1
-    skip-cert-verify: true
-  - name: TR•VIP•TLS2
     type: trojan
-    server: vip13.globalssh.com
-    port: 443
     password: pedoluh
-    udp: true
-    sni: layanan.ruangguru.com
-    alpn:
-      - h2
-      - http/1.1
     skip-cert-verify: true
+    sni: media.fcgk35-1.fna.whatsapp.net
+    udp: true
   - name: VM•VIP
     server: *domain
     port: 443
