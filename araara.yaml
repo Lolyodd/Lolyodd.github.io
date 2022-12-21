@@ -1,0 +1,180 @@
+port: 7891
+socks-port: 7892
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+ipv6: false
+mode: rule
+log-level: info
+unified-delay: true
+geodata-mode: true
+tcp-concurrent: true
+
+sniffer:
+  enable: true
+  sniffing: [ tls, http ]
+  port-whitelist: [ 80, 443 ]
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  default-nameserver: [ 8.8.8.8, 8.8.4.4 ]
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver: [ 8.8.8.8, 8.8.4.4, https://dns.gooogle/dns-query, tls://dns.google:853 ]
+  fallback: [ 76.76.2.2, 76.76.10.2, https://freedns.controld.com/p2, tls://p2.freedns.controld.com:853 ]
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite: [ gfw ]
+
+proxy-groups:
+- name: Proxy 🌐
+  type: select
+  proxies:
+  - VIP
+  - FREE
+  - StreamingPing
+  - SosmedPing
+  - 💾 Mega
+  - DIRECT
+  - REJECT
+
+- name: VIP
+  type: select
+  use:
+  - vip
+
+- name: FREE
+  type: select
+  use:
+  - free
+
+- name: StreamingPing
+  type: url-test
+  disable-udp: false
+  use:
+  - vip
+  url: 'http://cp.cloudflare.com/generate_204'
+  interval: '300'
+
+- name: SosmedPing
+  type: select
+  disable-udp: false
+  use:
+  - free
+  url: 'http://cp.cloudflare.com/generate_204'
+  interval: '300'
+
+- name: SpeedTest
+  type: select
+  use:
+  - vip
+  - free
+
+- name: 💾 Mega
+  type: select
+  disable-udp: false
+  use:
+  - vip
+  - free
+  url: 'http://cp.cloudflare.com/generate_204'
+  interval: '300'
+proxy-providers:
+  vip:
+    type: file
+    path: ./vip.yaml
+#    url: https://raw.githubusercontent.com/Lolyodd/lolyodd.github.io/master/config/proxy/sg.yaml
+    health-check:
+      enable: true
+      interval: 300
+      lazy: true
+      url: 'http://cp.cloudflare.com/generate_204'
+      
+  free:
+    type: file
+    path: ./free.yaml
+#    url: https://raw.githubusercontent.com/Lolyodd/lolyodd.github.io/master/config/proxy/id.yaml
+    health-check:
+      enable: true
+      interval: 300
+      lazy: true
+      url: 'http://cp.cloudflare.com/generate_204'
+
+rule-providers:
+  rule_Sosmed:
+    type: http
+    behavior: classical
+    path: "./rule_sosmed.yaml"
+    url: https://raw.githubusercontent.com/malikshi/clash_for_android/main/rule_provider/rule_sosmed.yaml
+    interval: 86400
+  rule_Streaming:
+    type: http
+    behavior: classical
+    path: "./rule_streaming.yaml"
+    url: https://raw.githubusercontent.com/malikshi/clash_for_android/main/rule_provider/rule_streaming.yaml
+    interval: 86400
+  rule_Youtube:
+    type: http
+    behavior: domain
+    url: https://rules.kr328.app/youtube.yaml
+    path: "./rule_Youtube.yaml"
+    interval: 86400
+  rule_Speedtest:
+    type: http
+    behavior: domain
+    url: https://rules.kr328.app/speedtest.yaml
+    path: "./rule_speedtest.yaml"
+    interval: 86400
+  rule_BlockAds:
+    type: http
+    behavior: classical
+    path: "./rule_BlockAds.yaml"
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising_Classical.yaml
+    interval: 86400
+  rule_Mega:
+    type: http
+    behavior: classical
+    path: "./MEGA.yaml"
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/MEGA/MEGA.yaml
+    interval: 86400
+
+  rule_playstore:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_playstore.yaml
+    path: "./rule_provider/rule_playstore.yaml"
+    interval: 86400
+rules:
+ #=============AdsBlock============#
+  - RULE-SET,rule_BlockAds,REJECT
+# - RULE-SET,rule_reject,REJECT
+# - RULE-SET,rule_basicads,REJECT
+# - RULE-SET,rule_privacy,REJECT
+ #=============Apps============#
+  - RULE-SET,rule_Speedtest,SpeedTest
+  - RULE-SET,rule_Streaming,StreamingPing
+  - RULE-SET,rule_Youtube,StreamingPing
+  - RULE-SET,rule_Sosmed,SosmedPing
+  - RULE-SET,rule_Mega,💾 Mega
+  - PROCESS-NAME,mega.privacy.android.app,💾 Mega
+  - RULE-SET,rule_playstore,SosmedPing
+ #=============ETC============#
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,::1/128,DIRECT,no-resolve
+  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
+  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - GEOIP,IR,DIRECT
+
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - GEOIP,CN,DIRECT
+  - DST-PORT,80,DIRECT
+  - SRC-PORT,7777,DIRECT
+  - MATCH,Proxy 🌐
