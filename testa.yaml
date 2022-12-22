@@ -160,7 +160,7 @@ Streaming: &lb
   type: url-test
   strategy: consistent-hashing
   <<: [ *check, *free ]
-Mega: &mega
+Mega: &megaz
   type: select
   <<: *megaz
 
