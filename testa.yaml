@@ -147,7 +147,7 @@ vip: &vip
   proxies: [ VM•VIP, VL•VIP, TR•VIP, TR•VIP•TLS ]
 free: &free
   proxies: [ VM•CTB•FREE, VM•OVH•FREE, VM•IKD•FREE, SS•CH•FREE ]
-megan: &megaz
+meganz: &meganzz
   proxies: [ Linode 30Des, SGDO 30Des ]
 
 Select: &select
@@ -160,9 +160,9 @@ Streaming: &lb
   type: url-test
   strategy: consistent-hashing
   <<: [ *check, *free ]
-Mega: &megaz
+Select: &selectmega
   type: select
-  <<: *megaz
+  <<: *meganzz
 
 proxies:
 #==============VIP=============#
@@ -327,7 +327,7 @@ proxy-groups:
   - name: 🎬Streaming
     <<: *url-test
   - name: 💾Mega
-    <<: *megaz
+    <<: *selectmega
 
 rule-providers:
   clash:
