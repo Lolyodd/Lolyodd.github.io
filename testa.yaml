@@ -284,7 +284,7 @@ proxies:
       headers:
         Host: vmess-ikd-id01.globalssh.xyz
     udp: true
-- name: SGDO 30Des
+  - name: SGDO 30Des
     server: 172.67.199.34
     port: 80
     type: vmess
