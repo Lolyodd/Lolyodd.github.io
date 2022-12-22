@@ -327,7 +327,7 @@ proxy-groups:
   - name: 🎬Streaming
     <<: *url-test
   - name: 💾Mega
-    <<: *megaz
+    <<: *select
 
 rule-providers:
   clash:
