@@ -31,3 +31,19 @@ proxies:
       headers:
         Host: id2-ray.ipservers.xyz
     udp: true
+  - name: ID WhyVPN
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: a9d8c010-4a82-4172-b735-75212958420a
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: id1.kitu.xyz
+    network: ws
+    ws-opts:
+      path: /vmess/
+      headers:
+        Host: id1.kitu.xyz
+    udp: true
