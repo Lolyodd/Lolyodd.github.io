@@ -171,7 +171,7 @@ proxy-groups:
   - AKUN1
   - AKUN2
   - Fallback-Akun1
-  - Fallback-Akun1
+  - Fallback-Akun2
   - Ping-Akun1
   - Ping-Akun2
   - Loadbalance
@@ -185,7 +185,7 @@ proxy-groups:
   - AKUN1
   - AKUN2
   - Fallback-Akun1
-  - Fallback-Akun1
+  - Fallback-Akun2
   - Ping-Akun1
   - Ping-Akun2
   - Loadbalance
@@ -199,7 +199,7 @@ proxy-groups:
   - AKUN1
   - AKUN2
   - Fallback-Akun1
-  - Fallback-Akun1
+  - Fallback-Akun2
   - Ping-Akun1
   - Ping-Akun2
   - Loadbalance
@@ -213,7 +213,7 @@ proxy-groups:
   - AKUN1
   - AKUN2
   - Fallback-Akun1
-  - Fallback-Akun1
+  - Fallback-Akun2
   - Ping-Akun1
   - Ping-Akun2
   - Loadbalance
