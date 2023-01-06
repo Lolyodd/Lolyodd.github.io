@@ -1,0 +1,49 @@
+proxies:
+  - name: VM•CTB•VIP 🇸🇬
+    server: 172.67.199.34
+    port: 443
+    type: vmess
+    uuid: 92f859a2-f8ac-4b3a-a291-7a0b30435b17
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-ctb-sg01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/pedidu-globalssh
+      headers:
+        Host: vmess-ctb-sg01.globalssh.xyz
+    udp: true
+  - name: VM•OVH•VIP 🇸🇬
+    server: 172.67.199.34
+    port: 443
+    type: vmess
+    uuid: 5ecb740b-f004-4c6f-90fd-30cbe6596f04
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-ovh-sg01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/ovhpedo-globalssh
+      headers:
+        Host: vmess-ovh-sg01.globalssh.xyz
+    udp: true
+  - name: VM•IKD•VIP 🇮🇩
+    server: 172.67.199.34
+    port: 443
+    type: vmess
+    uuid: 49acef15-2452-4736-a17d-78bdd3a996ee
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: vmess-ikd-id01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess-ws/messpedo-globalssh
+      headers:
+        Host: vmess-ikd-id01.globalssh.xyz
+    udp: true
