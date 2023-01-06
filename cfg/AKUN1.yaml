@@ -1,49 +1,49 @@
 proxies:
-  - name: VM•CTB•VIP 🇸🇬
+  - name: RealSSH SG
     server: 172.67.199.34
     port: 443
     type: vmess
-    uuid: 92f859a2-f8ac-4b3a-a291-7a0b30435b17
+    uuid: 30e7cd06-e836-4ac2-98be-4ea93217230a
     alterId: 0
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: vmess-ctb-sg01.globalssh.xyz
+    servername: sg01-vmess.realssh.xyz
     network: ws
     ws-opts:
-      path: /vmess-ws/pedidu-globalssh
+      path: /vmess
       headers:
-        Host: vmess-ctb-sg01.globalssh.xyz
+        Host: sg01-vmess.realssh.xyz
     udp: true
-  - name: VM•OVH•VIP 🇸🇬
+  - name: RealSSH ID
     server: 172.67.199.34
     port: 443
     type: vmess
-    uuid: 5ecb740b-f004-4c6f-90fd-30cbe6596f04
+    uuid: b18dabeb-829b-4cce-8e6b-442659379ff7
     alterId: 0
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: vmess-ovh-sg01.globalssh.xyz
+    servername: id01-vmess.realssh.xyz
     network: ws
     ws-opts:
-      path: /vmess-ws/ovhpedo-globalssh
+      path: /vmess
       headers:
-        Host: vmess-ovh-sg01.globalssh.xyz
+        Host: id01-vmess.realssh.xyz
     udp: true
-  - name: VM•IKD•VIP 🇮🇩
+  - name: GeGe
     server: 172.67.199.34
     port: 443
     type: vmess
-    uuid: 49acef15-2452-4736-a17d-78bdd3a996ee
+    uuid: 1b6818e6-8ca2-11ed-aedb-06b3e42ba9c8
     alterId: 0
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: vmess-ikd-id01.globalssh.xyz
+    servername: wjvit.fastervpn.my.id
     network: ws
     ws-opts:
-      path: /vmess-ws/messpedo-globalssh
+      path: /YOURPATH/v2ray-vmess-ws-tls
       headers:
-        Host: vmess-ikd-id01.globalssh.xyz
+        Host: wjvit.fastervpn.my.id
     udp: true
