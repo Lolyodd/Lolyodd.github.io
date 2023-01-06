@@ -1,25 +1,100 @@
 ---
-redir-port: 7892
 port: 7890
 socks-port: 7891
+redir-port: 7892
+tproxy-port: 7895
 mixed-port: 7893
+allow-lan: true
 mode: script
 log-level: info
-allow-lan: true
+ipv6: false
 external-controller: 0.0.0.0:9090
-external-ui: "./"
+external-ui: folder
 dns:
   enable: true
-  listen: 0.0.0.0:1053
-  default-nameserver: [ 8.8.8.8, 8.8.4.4 ]
+  ipv6: false
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  nameserver: [ 8.8.8.8, 8.8.4.4, https://dns.gooogle/dns-query, tls://dns.google:853 ]
-  fallback: [ 76.76.2.2, 76.76.10.2, https://freedns.controld.com/p2, tls://p2.freedns.controld.com:853 ]
+  listen: 0.0.0.0:7874
   fallback-filter:
     geoip: true
-    geoip-code: CN
-    geosite: [ gfw ]
+    geoip-code: ID
+    ipcidr:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.24.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.18.0.0/15
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/4
+    - 240.0.0.0/4
+    - 255.255.255.255/32
+    domain:
+    - "+.google.com"
+    - "+.netflix.com"
+    - "+.facebook.com"
+    - "+.youtube.com"
+    - "+.githubusercontent.com"
+    - "+.googlevideo.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+  fake-ip-filter:
+  - "+.pool.ntp.org"
+  - ntp7.*.com
+  - ntp6.*.com
+  - ntp5.*.com
+  - ntp4.*.com
+  - ntp3.*.com
+  - ntp2.*.com
+  - ntp1.*.com
+  - ntp.*.com
+  - time7.*.com
+  - time6.*.com
+  - time5.*.com
+  - time4.*.com
+  - time3.*.com
+  - time2.*.com
+  - time1.*.com
+  - time.*.apple.com
+  - time.*.edu.cn
+  - time.*.gov
+  - time.*.com
+  - "*.home.arpa"
+  - "*.local"
+  - "*.test"
+  - "*.localhost"
+  - "*.invalid"
+  - "*.example"
+  - "*.localdomain"
+  - time1.cloud.tencent.com
+  - "*.ntp.org"
+  - "*.time.edu"
+  - "*.lan"
+  - "*.ntp.org.cn"
+  - "*.time.edu.cn"
+  - "+.*"
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver:
+  - 8.8.8.8
+  - 8.8.4.4
+  - 1.1.1.1
+  - 1.0.0.1
+  nameserver:
+  - 8.8.8.8
+  - 8.8.4.4
+  - https://dns.google/dns-query
+  - tls://dns.google
+  - 1.1.1.1
+  - 1.0.0.1
 
 proxy-providers:
   AKUN1:
@@ -126,6 +201,7 @@ proxy-groups:
   proxies:
   - AKUN2
   - AKUN1
+  - DIRECT
   url: 'http://cp.cloudflare.com/generate_204'
   interval: '300'
 
@@ -805,7 +881,7 @@ rules:
 - RULE-SET,Olshopmaster,Online Shop 🛒
 - RULE-SET,Bankmaster,MBanking 💲
 - RULE-SET,Whatsappmaster,WHATSAPP ONLY
-- GEOIP,CN,Home 🌐
+- GEOIP,ID,Home 🌐
 - MATCH,Home 🌐
 tun:
   enable: true
