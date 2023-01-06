@@ -1,6 +1,6 @@
 proxies:
   - name: RealSSH SG
-    server: 172.67.199.34
+    server: 141.193.213.20
     port: 443
     type: vmess
     uuid: 30e7cd06-e836-4ac2-98be-4ea93217230a
@@ -15,24 +15,24 @@ proxies:
       headers:
         Host: sg01-vmess.realssh.xyz
     udp: true
-  - name: RealSSH ID
+  - name: HERB-SG
     server: 172.67.199.34
     port: 443
     type: vmess
-    uuid: b18dabeb-829b-4cce-8e6b-442659379ff7
+    uuid: 9e94f30b-8796-4492-a80d-5c9d537652d7
     alterId: 0
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: id01-vmess.realssh.xyz
+    servername: sgo-2.herbalv2ray.me
     network: ws
     ws-opts:
-      path: /vmess
+      path: /herbalserver
       headers:
-        Host: id01-vmess.realssh.xyz
+        Host: sgo-2.herbalv2ray.me
     udp: true
   - name: GeGe
-    server: 172.67.199.34
+    server: 141.193.213.20
     port: 443
     type: vmess
     uuid: 1b6818e6-8ca2-11ed-aedb-06b3e42ba9c8
@@ -46,4 +46,68 @@ proxies:
       path: /YOURPATH/v2ray-vmess-ws-tls
       headers:
         Host: wjvit.fastervpn.my.id
+    udp: true
+  - name: SG OpenTunnel
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: a40d34c6-b77c-4648-9210-3e8d2f4226b5
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sgv-2.openv2ray.com
+    network: ws
+    ws-opts:
+      path: /u/opentunnel.net-pedosghh
+      headers:
+        Host: sgv-2.openv2ray.com
+    udp: true
+  - name: SG Herbal
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: 29607abb-2907-4923-9779-97195e39da01
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sgo-2.herbalv2ray.me
+    network: ws
+    ws-opts:
+      path: /herbalserver
+      headers:
+        Host: sgo-2.herbalv2ray.me
+    udp: true
+  - name: SG Jago
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: 3d78ccb8-6da3-4945-9610-712cec194897
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg-ray.ipservers.xyz
+    network: ws
+    ws-opts:
+      path: /JAGOANSSH/
+      headers:
+        Host: sg-ray.ipservers.xyz
+    udp: true
+  - name: SGG
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: bc4e235b-c8a6-4a57-a5cd-d84e03388310
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: kwlp7.ftvpn.xyz
+    network: ws
+    ws-opts:
+      path: /vmess
+      headers:
+        Host: kwlp7.ftvpn.xyz
     udp: true
