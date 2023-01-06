@@ -25,7 +25,7 @@ proxy-providers:
   AKUN1:
     type: http
     path: "./AKUN1.yaml"
-    url: https://bit.ly/3PRCNPb
+    url: https://bit.ly/3CsjrKS
     interval: 3600
     health-check:
       enable: true
@@ -34,7 +34,7 @@ proxy-providers:
   AKUN2:
     type: http
     path: "./AKUN2.yaml"
-    url: http://bit.ly/3hUoj4w
+    url: http://bit.ly/3imj9i0
     interval: 3600
     health-check:
       enable: true
