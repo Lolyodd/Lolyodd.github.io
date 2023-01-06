@@ -229,7 +229,7 @@ proxy-groups:
   - DIRECT
   url: 'http://cp.cloudflare.com/generate_204'
   interval: '300'
-#-------------++-----++--ETC--++----++--------------#
+#------------++-----++--ETC--++----++-------------#
 - name: Fallback-Akun1
   type: fallback
   disable-udp: false
@@ -244,8 +244,8 @@ proxy-groups:
   - AKUN2
   url: http://www.gstatic.com/generate_204
   interval: '99'
-#----------------------------------------------------#
-- name: Ping-Akun2
+#-------------------------------------------------#
+- name: Ping-Akun1
   type: url-test
   disable-udp: false
   use:
@@ -261,7 +261,7 @@ proxy-groups:
   url: http://www.gstatic.com/generate_204
   interval: '99'
   tolerance: '99'
-#----------------------------------------------------#
+#-------------------------------------------------#
 - name: Loadbalance
   type: load-balance
   strategy: round-robin
@@ -271,6 +271,7 @@ proxy-groups:
   - AKUN2
   url: http://www.gstatic.com/generate_204
   interval: '99'
+#-------------------------------------------------#
 rule-providers:
   Gamemaster:
     type: file
