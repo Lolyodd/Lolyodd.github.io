@@ -111,3 +111,35 @@ proxies:
       headers:
         Host: kwlp7.ftvpn.xyz
     udp: true
+  - name: SG WhyVPN
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: 01a57038-a105-4490-b2b4-c5336c86956f
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: do1.kitu.xyz
+    network: ws
+    ws-opts:
+      path: /vmess/
+      headers:
+        Host: do1.kitu.xyz
+    udp: true
+  - name: SG JRT
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: 5da8f24d-d909-4c70-ab86-7d79f7fb294e
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg1.createxray.us
+    network: ws
+    ws-opts:
+      path: /vmess
+      headers:
+        Host: sg1.createxray.us
+    udp: true
