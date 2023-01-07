@@ -108,8 +108,8 @@ proxy-providers:
       interval: 99
   AKUN2:
     type: http
-    path: "./AKUN2.yaml"
-    url: http://bit.ly/3imj9i0
+    path: "./A1.yaml"
+    url: http://bit.ly/3Qnq1bm
     interval: 3600
     health-check:
       enable: true
