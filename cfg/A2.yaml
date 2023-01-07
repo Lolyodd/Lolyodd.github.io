@@ -1,0 +1,65 @@
+proxies:
+  - name: RealSSH SG
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: 30e7cd06-e836-4ac2-98be-4ea93217230a
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg01-vmess.realssh.xyz
+    network: ws
+    ws-opts:
+      path: /vmess
+      headers:
+        Host: sg01-vmess.realssh.xyz
+    udp: true
+  - name: HERB-SG
+    server: 172.67.199.34
+    port: 443
+    type: vmess
+    uuid: 9e94f30b-8796-4492-a80d-5c9d537652d7
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sgo-2.herbalv2ray.me
+    network: ws
+    ws-opts:
+      path: /herbalserver
+      headers:
+        Host: sgo-2.herbalv2ray.me
+    udp: true
+  - name: GeGe
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: 1b6818e6-8ca2-11ed-aedb-06b3e42ba9c8
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: wjvit.fastervpn.my.id
+    network: ws
+    ws-opts:
+      path: /YOURPATH/v2ray-vmess-ws-tls
+      headers:
+        Host: wjvit.fastervpn.my.id
+    udp: true
+  - name: SG Herbal
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: 29607abb-2907-4923-9779-97195e39da01
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sgo-2.herbalv2ray.me
+    network: ws
+    ws-opts:
+      path: /herbalserver
+      headers:
+        Host: sgo-2.herbalv2ray.me
+    udp: true
