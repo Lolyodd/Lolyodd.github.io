@@ -1,0 +1,52 @@
+proxies:
+  - name: SS•CH•FREE 🇸🇬
+    type: ss
+    server: 172.67.199.34
+    port: 80
+    cipher: 2022-blake3-aes-128-gcm
+    password: GlobalSSHPremiumShadow==:bbAjzXBCg3iLIBvk+ilrsw==
+    udp: true
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: ss-ch-sg01.globalssh.xyz
+      tls: false
+      skip-cert-verify: true
+      path: "/shadow-ws/pedoss-globalssh"
+      mux: false
+      headers:
+        custom: ss-ch-sg01.globalssh.xyz
+  - name: SS•OVH•FREE 🇸🇬
+    type: ss
+    server: 172.67.199.34
+    port: 80
+    cipher: 2022-blake3-aes-128-gcm
+    password: GlobalSSHPremiumShadow==:bbAjzXBCg3iLIBvk+ilrsw==
+    udp: true
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: ss-ch-sg01.globalssh.xyz
+      tls: false
+      skip-cert-verify: true
+      path: "/shadow-ws/pedoss-globalssh"
+      mux: false
+      headers:
+        custom: ss-ch-sg01.globalssh.xyz
+  - name: SS•IKD•FREE 🇮🇩
+    type: ss
+    server: 172.67.199.34
+    port: 80
+    cipher: 2022-blake3-aes-128-gcm
+    password: GlobalSSHPremiumShadow==:bbAjzXBCg3iLIBvk+ilrsw==
+    udp: true
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: ss-ch-sg01.globalssh.xyz
+      tls: false
+      skip-cert-verify: true
+      path: "/shadow-ws/pedoss-globalssh"
+      mux: false
+      headers:
+        custom: ss-ch-sg01.globalssh.xyz
