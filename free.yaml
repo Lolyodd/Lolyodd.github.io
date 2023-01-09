@@ -151,8 +151,8 @@ dns:
 #====================SETTING=======================#
 proxys: &akun
     proxies:
-      - SS•CTB•FREE 🇸🇬
       - SG GeGe
+      - Masukin nama server lu
 
 connectivity-check: &check
   interval: 300
@@ -182,24 +182,23 @@ proxies:
       headers:
         Host: wjvit.fastervpn.my.id
     udp: true
-#====================ShadowSocks#====================#
-  - name: SS•CTB•FREE 🇸🇬
-    type: ss
-    server: 141.193.213.20
-    port: 80
-    cipher: 2022-blake3-aes-128-gcm
-    password: 
-    udp: true
-    plugin: v2ray-plugin
-    plugin-opts:
-      mode: websocket
-      host: ss-ctb-sg01.globalssh.xyz
-      tls: false
-      skip-cert-verify: true
-      path: "/shadow-ws/borutctb-globalssh"
-      mux: false
+
+  - name: SG TEST
+    server: masukin bug nya
+    port: 443
+    type: vmess
+    uuid: masukin uuid
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: masukin host
+    network: ws
+    ws-opts:
+      path: masukin path
       headers:
-        custom: ss-ctb-sg01.globalssh.xyz
+        Host: masukin host
+    udp: true
 #====================Home====================#
 proxy-groups:
   - name: Home 🌐
