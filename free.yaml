@@ -1,0 +1,355 @@
+---
+port: 7890
+socks-port: 7891
+redir-port: 7892
+tproxy-port: 7895
+mixed-port: 7893
+allow-lan: true
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 0.0.0.0:9090
+external-ui: folder
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  listen: 0.0.0.0:7874
+  fallback-filter:
+    geoip: true
+    geoip-code: ID
+    ipcidr:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.24.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.18.0.0/15
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/4
+    - 240.0.0.0/4
+    - 255.255.255.255/32
+    domain:
+    - "+.google.com"
+    - "+.netflix.com"
+    - "+.facebook.com"
+    - "+.youtube.com"
+    - "+.githubusercontent.com"
+    - "+.googlevideo.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+    fake-ip-filter:
+    - "+.pool.ntp.org"
+    - ntp7.*.com
+    - ntp6.*.com
+    - ntp5.*.com
+    - ntp4.*.com
+    - ntp3.*.com
+    - ntp2.*.com
+    - ntp1.*.com
+    - ntp.*.com
+    - time7.*.com
+    - time6.*.com
+    - time5.*.com
+    - time4.*.com
+    - time3.*.com
+    - time2.*.com
+    - time1.*.com
+    - time.*.apple.com
+    - time.*.edu.cn
+    - time.*.gov
+    - time.*.com
+    - "*.home.arpa"
+    - "*.local"
+    - "*.test"
+    - "*.localhost"
+    - "*.invalid"
+    - "*.example"
+    - "*.localdomain"
+    - time1.cloud.tencent.com
+    - "*.ntp.org"
+    - "*.time.edu"
+    - "*.lan"
+    - "*.ntp.org.cn"
+    - "*.time.edu.cn"
+    - "+.*"
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+  - https://dns.adguard-dns.com:3000/dns-query
+  - tls://dns.adguard-dns.com:3000
+  - 74.82.42.42
+  - 103.133.222.202
+  default-nameserver:
+  - 74.82.42.42
+  - 103.133.222.202
+  fake-ip-filter:
+  - "*.lan"
+  - "*.localdomain"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
+  - "*.local"
+  - "*.home.arpa"
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time-ios.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "*.time.edu.cn"
+  - "*.ntp.org.cn"
+  - "+.pool.ntp.org"
+  - time1.cloud.tencent.com
+  - "+.msftconnecttest.com"
+  - "+.msftncsi.com"
+  - "+.msftconnecttest.com"
+  - "+.msftncsi.com"
+  - stun.*.*
+  - stun.*.*.*
+  - "+.stun.*.*"
+  - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - "*.linksys.com"
+  - "*.linksyssmartwifi.com"
+  - "*.router.asus.com"
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - lens.l.google.com
+  - "+.google.com"
+  - Mijia Cloud
+  - "+.cmbchina.com"
+  - "+.cmbimg.com"
+#====================SETTING=======================#
+proxys: &akun
+    proxies:
+      - SS•CTB•FREE 🇸🇬
+      - SG GeGe
+
+connectivity-check: &check
+  interval: 300
+  url: 'http://cp.cloudflare.com/generate_204'
+URL-Test: &url-test 
+  type: url-test
+  <<: [ *check, *akun ]
+Load-Balance: &lb
+  type: load-balance
+  strategy: consistent-hashing
+  <<: [ *check, *akun ]
+#====================Vmess=======================#
+proxies:
+  - name: SG GeGe
+    server: 141.193.213.20
+    port: 443
+    type: vmess
+    uuid: 1b6818e6-8ca2-11ed-aedb-06b3e42ba9c8
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: wjvit.fastervpn.my.id
+    network: ws
+    ws-opts:
+      path: /YOURPATH/v2ray-vmess-ws-tls
+      headers:
+        Host: wjvit.fastervpn.my.id
+    udp: true
+#====================ShadowSocks#====================#
+  - name: SS•CTB•FREE 🇸🇬
+    type: ss
+    server: 141.193.213.20
+    port: 80
+    cipher: 2022-blake3-aes-128-gcm
+    password: 
+    udp: true
+    plugin: v2ray-plugin
+    plugin-opts:
+      mode: websocket
+      host: ss-ctb-sg01.globalssh.xyz
+      tls: false
+      skip-cert-verify: true
+      path: "/shadow-ws/borutctb-globalssh"
+      mux: false
+      headers:
+        custom: ss-ctb-sg01.globalssh.xyz
+#====================Home====================#
+proxy-groups:
+  - name: Home 🌐
+    type: select
+    disable-udp: false
+    proxies:
+      - Proxy 🌐
+      - Streaming 🎬
+      - Sosmed 🔔
+      - Online Shop 🛒
+      - Games 🎮
+      - MBanking 💲
+      - DIRECT
+  - name: Proxy 🌐
+    type: select
+    proxies:
+      - ALL
+#====================Proxi Group==================#
+  - name: Sosmed 🔔
+    type: select
+    disable-udp: false
+    proxies:
+      - Sosmed-Select
+      - Sosmed-Ping
+
+  - name: Streaming 🎬
+    type: select
+    disable-udp: false
+    proxies:
+      - Stream-Select
+      - Sosmed-Ping
+
+  - name: Games 🎮
+    type: select
+    disable-udp: false
+    proxies:
+      - Games-Select
+      - Game-Ping
+
+  - name: Online Shop 🛒
+    type: select
+    disable-udp: false
+    proxies:
+      - Shop-Select
+
+  - name: MBanking 💲
+    type: select
+    disable-udp: false
+    proxies:
+      - Bank-Select
+#===================Proxi====================#
+  - name: ALL
+    type: select
+    disable-udp: false
+    <<: *akun 
+  - name: Stream-Select
+    type: select
+    disable-udp: false
+    <<: *akun 
+  - name: Sosmed-Select
+    type: select
+    disable-udp: false
+    <<: *akun 
+  - name: Games-Select
+    type: select
+    disable-udp: false
+    <<: *akun 
+  - name: Shop-Select
+    type: select
+    disable-udp: false
+    <<: *akun 
+  - name: Bank-Select
+    type: select
+    disable-udp: false
+    <<: *akun
+  - name: Sosmed-Ping
+    <<: *url-test
+  - name: Stream-Ping
+    <<: *url-test
+  - name: Game-Ping
+    <<: *url-test
+
+#------------------Rules-------------------------#
+rule-providers:
+  Gamemaster:
+    type: file
+    behavior: classical
+    path: ./rule-port-game.yaml
+    url: https://bit.ly/3jTPM6Y
+    interval: 3600
+  Sosmedmaster:
+    type: file
+    behavior: classical
+    path: ./rule-port-sosmed.yaml
+    url: https://bit.ly/3Zfm5xq
+    interval: 3600
+  Streammaster:
+    type: file
+    behavior: classical
+    path: ./rule-port-stream.yaml
+    url: https://bit.ly/3jWwSfR
+    interval: 3600
+  Olshopmaster:
+    type: file
+    behavior: classical
+    path: ./rule-port-olshop.yaml
+    url: https://bit.ly/3WUsMDE
+    interval: 3600
+  Bankmaster:
+    type: file
+    behavior: classical
+    path: ./rule-port-bank.yaml
+    url: https://bit.ly/3ijtg77
+    interval: 3600
+  Whatsappmaster:
+    type: file
+    behavior: classical
+    path: ./rule-port-whatsapp.yaml
+    url: https://bit.ly/3ZfwXva
+    interval: 3600
+  rule_BlockAds:
+    type: http
+    behavior: classical
+    path: "./rule_BlockAds.yaml"
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising_Classical.yaml
+    interval: 86400
+
+rules:
+- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+- RULE-SET,rule_BlockAds,REJECT
+- RULE-SET,Gamemaster,Games 🎮
+- RULE-SET,Sosmedmaster,Sosmed 🔔
+- RULE-SET,Streammaster,Streaming 🎬
+- RULE-SET,Olshopmaster,Online Shop 🛒
+- RULE-SET,Bankmaster,MBanking 💲
+- GEOIP,ID,Proxy 🌐
+- MATCH,Proxy 🌐
+tun:
+  enable: true
+  stack: system
+  auto-route: false
+  auto-detect-interface: false
+  dns-hijack:
+  - tcp://any:53
+profile:
+  store-selected: true
+  store-fake-ip: true
+secret: '123456'
+bind-address: "*"
+experimental:
+  sniff-tls-sni: true
+authentication:
+- Clash:hckUjOup
